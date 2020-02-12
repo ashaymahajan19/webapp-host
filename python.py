@@ -14,8 +14,8 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
-#mycursor.execute("select * from login")
-#myresult = mycursor.fetchall() # it gives the list
+mycursor.execute("select * from register")
+myresult = mycursor.fetchall() # it gives the list
 
 # Create instance of FieldStorage
 print ("Content-Type: text/html\n")
@@ -26,15 +26,22 @@ form = cgi.FieldStorage()
 username = form.getvalue('Username')
 password  = form.getvalue('Password')
 
-def create_table():
-    mycursor.execute()
+
+for row in myresult:
+        if(username == row[0]):
+                print("Username already exists")
+        else:
+                print("Try other username")
+
 def data_entry():
     name = username
     pass1 = password
-    mycursor.execute("INSERT INTO register (username, password) VALUES (?,?)", (name,pass1))
+    mycursor.execute("INSERT INTO register (username, password) VALUES (%s,%s)", (name,pass1))
     mydb.commit()
 
-create_table()
+print("<pre><h2>Successfully Registered</h2></pre>")
+
+#create_table()
 data_entry()
 
 

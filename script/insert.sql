@@ -1,1 +1,1 @@
-insert into login values("jackpot", "tomcat123");
+insert into register values("jackpot", "tomcat123");
