@@ -28,22 +28,20 @@ password  = form.getvalue('Password')
 
 
 for row in myresult:
-        if(username == row[0]):
+        if (username == row[0]):
                 print("Username already exists")
-        else:
-                print("Try other username")
+#        else:
+ #               print("Success")
 
 def data_entry():
     name = username
     pass1 = password
-    mycursor.execute("INSERT INTO register (username, password) VALUES (%s,%s)", (name,pass1))
+    mycursor.execute("INSERT INTO register(username, password) VALUES (%s,%s)", (name,pass1))
+    print("<pre><h2>Successfully Registered</h2></pre>")
     mydb.commit()
 
-print("<pre><h2>Successfully Registered</h2></pre>")
+#print("<pre><h2>Successfully Registered</h2></pre>")
 
 #create_table()
 data_entry()
 
-
-mycursor.close()
-mydb.close()

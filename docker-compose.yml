@@ -10,7 +10,7 @@ services:
   restart: always
   container_name: website
   ports:
-   - 8080:80
+   - 9595:80
  db:
   image: mysql:v1
   build:
