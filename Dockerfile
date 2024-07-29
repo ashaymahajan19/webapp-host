@@ -1,10 +1,17 @@
-FROM centos
-RUN yum install httpd python36 -y
-RUN pip3 install mysql-connector-python
+# Use a build argument to choose the base image
+ARG BASE_IMAGE=almalinux:8
 
-COPY index.html /var/www/html/index.html
-COPY python.py  /var/www/cgi-bin/python.py
-RUN chmod +x /var/www/cgi-bin/python.py
-ENV MYSQL_HOST $MYSQL_HOST
+FROM ${BASE_IMAGE}
+
+# Install necessary packages
+RUN dnf install -y httpd python3
+
+# Copy your application files (example)
+COPY . /var/www/html
+
+# Expose the port your web application uses
 EXPOSE 80
-ENTRYPOINT httpd -DFOREGROUND
+
+# Command to run your application
+CMD ["httpd", "-D", "FOREGROUND"]
+
